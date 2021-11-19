@@ -55,6 +55,6 @@ def steer(start, goal, d):
     """
     start, end = np.array(start), np.array(goal)
     v = end - start
-    u = v / (np.sqrt(np.sum(v ** 2)))
+    u = v / (np.sqrt(np.sum(v ** 2)) + 0.001)
     steered_point = start + u * d
-    return tuple(steered_point)
+    return tuple(steered_point.astype("int32"))

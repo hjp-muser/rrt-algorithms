@@ -37,4 +37,4 @@ class RRT(RRTBase):
 
                     solution = self.check_solution()
                     if solution[0]:
-                        return solution[1]
+                        return solution

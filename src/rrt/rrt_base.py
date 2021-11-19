@@ -166,11 +166,12 @@ class RRTBase(object):
                 return True, path
         # check if can connect to goal after generating max_samples
         if self.samples_taken >= self.max_samples:
-            return True, self.get_path()
+            x_nearest = self.get_nearest(0, self.x_goal)
+            return True, self.reconstruct_path(0, self.x_init, x_nearest)
         return False, None
 
     def bound_point(self, point):
         # if point is out-of-bounds, set to bound
-        point = np.maximum(point, self.X.dimension_lengths[:, 0])
-        point = np.minimum(point, self.X.dimension_lengths[:, 1])
+        point = np.maximum(point, self.X.dimension_ranges[:, 0])
+        point = np.minimum(point, self.X.dimension_ranges[:, 1])
         return tuple(point)
